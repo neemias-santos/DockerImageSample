@@ -13,13 +13,10 @@ class SmallListTest extends TestCase
 	 */
 	public function testAddSmallList($params)
 	{
-		$this->smallList = new SmallList();
-		$this->smallList->addlist($params);
-		$key = $this->smallList->generateKey($params);
-
-		$list = $this->smallList->getList();
-
-		$this->assertArrayHasKey($key, $list);
+		$smallList = new SmallList();
+		$itemKey = $smallList->addList($params);
+		$list = $smallList->getList();
+		$this->assertArrayHasKey($itemKey, $list);
 	}
 
 	/**
@@ -30,9 +27,8 @@ class SmallListTest extends TestCase
 	public function testEditSmallList($params)
 	{
 		$smallList = new SmallList();
-		$smallList->addlist($params);
+		$key = $smallList->addList($params);
 
-		$key = $smallList->generateKey($params);
 		$list = $smallList->getItemList($key);
 		$this->assertEquals($params, $list);
 
@@ -40,17 +36,36 @@ class SmallListTest extends TestCase
 
 		$result = $smallList->editList($key, $editedParam);
 
+		$this->assertEquals($editedParam, $result);
 	}
 
 	/**
-	 *
-	 * @return void
+	 * @dataProvider listDataProvider
 	 */
-	public function listDataProvider()
+	public function testDelete($params) {
+
+		$smallList = new SmallList();
+		$itemKey = $smallList->addList($params);
+		$list = $smallList->getList();
+		$this->assertArrayHasKey($itemKey, $list);
+
+		$smallList->deleteList($itemKey);
+
+		$list = $smallList->getList();
+		$this->assertArrayNotHasKey($itemKey, $list);
+	}
+
+	/**
+	 * @return array
+	 */
+	public function listDataProvider(): array
 	{
+		$testClass = new stdClass();
+		$testClass->fruitName = 'Pineapple';
 		return [
-			'Test 1' => ['banana', 'mango'],
-			'Test 2' => ['car', 'motor'],
+			'Test 1' => [$testClass],
+			'Test 2' => ['mango'],
+			'Test 3' => [['orange', 'lime']],
 		];
 	}
 }
