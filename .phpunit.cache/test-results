@@ -1,0 +1,1 @@
+{"version":1,"defects":{"MyTest::testMyTest":3,"MyTest::testBotPlayer with data set \"Success\"":5},"times":{"MyTest::testMyTest":0.087,"MyTest::testMyTest with data set \"Success\"":0.053,"MyTest::testMyTest with data set \"Fail 1\"":0,"MyTest::testMyTest with data set \"Fail 2\"":0,"MyTest::testBotPlayer with data set \"Success\"":0.01}}
