@@ -1,1 +1,3 @@
-# run `docker-compose up`
+# how to run
+
+run `docker-compose up`
