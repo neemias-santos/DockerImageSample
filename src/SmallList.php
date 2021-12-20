@@ -17,12 +17,13 @@ class SmallList
 			return;
 		}
 
-		$key = $this->generateKey($params);
+		$key = $this->getNewKey();
 		if (isset($this->list[$key])) {
 			return;
 		}
 
 		$this->list[$key] = $params;
+		return $key;
 	}
 
 	public function getList()
@@ -40,19 +41,25 @@ class SmallList
 		return $this->list[$key] ?? null;
 	}
 
+	/**
+	 * @param string $key
+	 * @param $params
+	 *
+	 * @return null
+	 */
 	public function editList(string $key, $params)
 	{
 		if (!$params) {
-			return;
+			return null;
 		}
 
 		$item = $this->getItemList($key);
 		if (!$item) {
-			return;
+			return null;
 		}
 
 		$this->list[$key] = $params;
-		return $this->list;
+		return $this->list[$key];
 	}
 
 	public function deleteList($key)
@@ -64,9 +71,20 @@ class SmallList
 		unset($this->list[$key]);
 	}
 
-	public function generateKey($params): string
+	public function generateKey(): string
 	{
-		return base64_encode($params);
+		return uniqid('list');
+	}
+
+	/**
+	 * @return string
+	 */
+	private function getNewKey(): string
+	{
+		do{
+			$key = $this->generateKey();
+		} while($this->getItemList($key) != null);
+		return $key;
 	}
 
 }
