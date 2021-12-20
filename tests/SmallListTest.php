@@ -14,7 +14,7 @@ class SmallListTest extends TestCase
 	public function testAddSmallList($params)
 	{
 		$smallList = new SmallList();
-		$itemKey = $smallList->addlist($params);
+		$itemKey = $smallList->addList($params);
 		$list = $smallList->getList();
 		$this->assertArrayHasKey($itemKey, $list);
 	}
@@ -27,7 +27,7 @@ class SmallListTest extends TestCase
 	public function testEditSmallList($params)
 	{
 		$smallList = new SmallList();
-		$key = $smallList->addlist($params);
+		$key = $smallList->addList($params);
 
 		$list = $smallList->getItemList($key);
 		$this->assertEquals($params, $list);
@@ -45,7 +45,7 @@ class SmallListTest extends TestCase
 	public function testDelete($params) {
 
 		$smallList = new SmallList();
-		$itemKey = $smallList->addlist($params);
+		$itemKey = $smallList->addList($params);
 		$list = $smallList->getList();
 		$this->assertArrayHasKey($itemKey, $list);
 
@@ -53,8 +53,6 @@ class SmallListTest extends TestCase
 
 		$list = $smallList->getList();
 		$this->assertArrayNotHasKey($itemKey, $list);
-
-
 	}
 
 	/**
