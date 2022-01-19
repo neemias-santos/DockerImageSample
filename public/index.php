@@ -1,8 +1,8 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use dockerPHP\CityGame;
+use dockerPHP\Session;
 
-$app = new CityGame();
+$app = new Session();
 
-echo $app->gameChecker([]);
+echo $app->handleSessionData([]);
